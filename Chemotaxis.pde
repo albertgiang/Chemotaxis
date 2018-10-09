@@ -5,13 +5,18 @@ void setup() {
   andy = new Missile[10];
 
   for (int i = 0; i < andy.length; i++) {
+    int red = (int)(Math.random() * 256);
+    int green = (int)(Math.random() * 256);
+    int blue = (int)(Math.random() * 256);
+    
     andy[i] = new Missile();
+    andy[i].red = red;
+    andy[i].green = green;
+    andy[i].blue = blue;
   }
 }   
 void draw() {    
   background(0);
-
-  //translate(mouseX / 2, mouseY / 2);
 
   for (int i = 0; i < andy.length; i++) {
     andy[i].show();
@@ -20,45 +25,43 @@ void draw() {
 }  
 
 class Missile {     
-  int myX, myY;
+  int myX, myY, red, green, blue;
   double myDirection;
   Missile() {
-    myX = 250;
-    myY = 250;
+    myX = 375;
+    myY = 750;
     myDirection = Math.random() * 6.28;
   }
 
   void walk() {
-    //float a = atan2(mouseY, mouseX);
 
     if (mouseX > myX) {
-      myX = myX + (int)(Math.random() * 5) -1; // [1,4]
-      //rotate(a / 500);
+      myX = myX + (int)(Math.random() * 5) -1; // [-1,3]
     } else {
-      myX = myX + (int)(Math.random() * 5) - 3; // [-4,-1]
-      //rotate(-a / 500);
+      myX = myX + (int)(Math.random() * 5) - 3; // [-3,1]
     }
 
     if (mouseY > myY) {
       myY = myY + (int)(Math.random() * 5) - 1;
-      //rotate(a / 500);
     } else {
       myY = myY + (int)(Math.random() * 5) - 3;
-      //rotate(-a / 500);
     }
     
     if(mouseX > myX && mouseY > myY){
-      myDirection = Math.PI / -3;
+      myDirection = 2 * Math.PI / 3;
     } else if (mouseX > myX && mouseY < myY){
       myDirection = Math.PI / 3;
     } else if (mouseX < myX && mouseY > myY){
-      myDirection = -2 * Math.PI / 3;
+      myDirection = 4 * Math.PI / 3;
     } else if (mouseX < myX && mouseY < myY){
-      myDirection = 2 * Math.PI / 3;
-    }
+      myDirection = 5 * Math.PI / 3;
+    } 
   }
 
   void show() {
+    
+    fill(red, green, blue);
+    
     translate(myX, myY);
     rotate((float)myDirection);
     ellipse(0, 0, 10, 50);
