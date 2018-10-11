@@ -1,4 +1,5 @@
-Missile[] andy;   
+Missile[] andy;
+UFO raymond;
 
 void setup() {     
   size(750, 750);
@@ -13,16 +14,35 @@ void setup() {
     andy[i].red = red;
     andy[i].green = green;
     andy[i].blue = blue;
+    
+    raymond = new UFO();
   }
 }   
 void draw() {    
   background(0);
-
+  
   for (int i = 0; i < andy.length; i++) {
+    andy[i].blowUp();
     andy[i].show();
     andy[i].walk();
+    
   }
-}  
+  
+  raymond.UFOShow();
+}
+
+class UFO {
+  UFO(){
+  }
+  
+  void UFOShow() {
+    fill(170, 170, 170);
+    ellipse(mouseX, mouseY, 50, 25);
+    
+    fill(#33B5DB);
+    ellipse(mouseX, mouseY - 10, 25, 15);
+  }
+}
 
 class Missile {     
   int myX, myY, red, green, blue;
@@ -66,8 +86,19 @@ class Missile {
     rotate((float)myDirection);
     ellipse(0, 0, 10, 50);
     triangle(0, 40, -15, 50, 15, 50);
-    rect(-5, 0, 10, 50);
+    rect(-5, 0, 10, 50);   
     rotate((float)-myDirection);
     translate(-myX, -myY);
+  }
+  
+  void blowUp() {
+    if(myX == mouseX && myY == mouseY){
+      fill(#00C5FF);
+      ellipse(mouseX, mouseY, 55, 55);
+      
+      stroke(255);
+      text("Warning: Shields Damaged", 100, 100);
+      stroke(0);
+    }
   }
 }    
