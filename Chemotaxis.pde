@@ -46,11 +46,11 @@ class UFO {
 
 class Missile {     
   int myX, myY, red, green, blue;
-  double myDirection;
+  float myDirection;
   Missile() {
     myX = 375;
     myY = 750;
-    myDirection = Math.random() * 6.28;
+    myDirection = (float)(Math.random() * 6.28);
   }
 
   void walk() {
@@ -68,13 +68,13 @@ class Missile {
     }
     
     if(mouseX > myX && mouseY > myY){
-      myDirection = 2 * Math.PI / 3;
+      myDirection = (float)(2 * Math.PI / 3);
     } else if (mouseX > myX && mouseY < myY){
-      myDirection = Math.PI / 3;
+      myDirection = (float)(Math.PI / 3);
     } else if (mouseX < myX && mouseY > myY){
-      myDirection = 4 * Math.PI / 3;
+      myDirection = (float)(4 * Math.PI / 3);
     } else if (mouseX < myX && mouseY < myY){
-      myDirection = 5 * Math.PI / 3;
+      myDirection = (float)(5 * Math.PI / 3);
     } 
   }
 
@@ -83,23 +83,23 @@ class Missile {
     fill(red, green, blue);
     
     translate(myX, myY);
-    rotate((float)myDirection);
+    rotate(myDirection);
     ellipse(0, 0, 10, 50);
     triangle(0, 40, -15, 50, 15, 50);
     rect(-5, 0, 10, 50);   
-    rotate((float)-myDirection);
+    rotate(-myDirection);
     translate(-myX, -myY);
   }
   
   void blowUp() {
     
     if(get(mouseX, mouseY) == color(0)){
-      fill(#00C5FF);
+      fill(0, 197, 255);
       text("WARNING: Ship locked. Evasive Maneuvers Reccommended.", 10, 20);
     }
     
     if(myX == mouseX && myY == mouseY){
-      fill(#00C5FF);
+      fill(0, 197, 255);
       ellipse(mouseX, mouseY, 55, 55);
       
       stroke(255);
