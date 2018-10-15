@@ -92,12 +92,19 @@ class Missile {
   }
   
   void blowUp() {
+    
+    if(get(mouseX, mouseY) == color(0)){
+      fill(#00C5FF);
+      text("WARNING: Ship locked. Evasive Maneuvers Reccommended.", 10, 20);
+    }
+    
     if(myX == mouseX && myY == mouseY){
       fill(#00C5FF);
       ellipse(mouseX, mouseY, 55, 55);
       
       stroke(255);
-      text("Warning: Shields Damaged", 100, 100);
+      text("Warning: Low Shield Energy", 10, 40);
+      text("Diverting Power From HUD to Shields", 10, 60);
       stroke(0);
     }
   }
